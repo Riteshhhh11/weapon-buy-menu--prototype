@@ -1,12 +1,18 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class BuyMenuUI : MonoBehaviour
 {
     public GameObject buyMenuPanel;
     public bool isBuyMenuOpen = false;
     public bool canControlPlayer;
+    public TextMeshProUGUI weaponName;
+    public TextMeshProUGUI weaponCategory;
+    public TextMeshProUGUI weaponPrice;
+    //public TextMeshProUGUI weaponRoundCapacity;
 
+    public ScriptableGuns ScriptableGuns;
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
@@ -43,5 +49,19 @@ public class BuyMenuUI : MonoBehaviour
         {
             buyMenuPanel.SetActive(true);
         } 
+    }
+    public void ShowWeaponStats() {
+        weaponName.SetText(ScriptableGuns.gunName);
+        Debug.Log("Showing stats for: " + ScriptableGuns.gunName);
+        weaponCategory.SetText(ScriptableGuns.gunCategory);
+        weaponPrice.SetText(ScriptableGuns.gunPrice.ToString());
+        //weaponRoundCapacity.SetText(ScriptableGuns.roundCapacity.ToString());
+    }
+
+    public void ClearWeaponStats() {
+         weaponName.text = ("");
+         weaponCategory.text = ("");
+         weaponPrice.text = ("");
+         //weaponRoundCapacity.text = ("");
     }
 }

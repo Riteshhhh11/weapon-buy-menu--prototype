@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bee65516711a1446bebbb27de36cb04, type: 3}
+  m_Name: AKM_Scriptable_Obj
+  m_EditorClassIdentifier: Assembly-CSharp::ScriptableGuns
+  gunName: AK47
+  gunCategory: Rifle
+  price: 2500
+  roundCapacity: 25
+  gunPrefab: {fileID: 8313538021832515234, guid: e32c54b9ff9772d48a953cf66ced5482, type: 3}
