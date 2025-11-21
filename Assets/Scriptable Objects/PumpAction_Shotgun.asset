@@ -17,4 +17,4 @@ MonoBehaviour:
   gunPrice: 3000
   roundCapacity: 40
   gunPrefab: {fileID: 7816975486093526949, guid: 4226537821a8e2e4f971d380f8cfa251, type: 3}
-  gunSpawnPosition: {x: 1, y: -0.56, z: 2.44}
+  gunSpawnPosition: {x: 0.92, y: -0.89, z: 2.74}

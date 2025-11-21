@@ -12,11 +12,15 @@ public class BuyMenuUI : MonoBehaviour
     public TextMeshProUGUI weaponCategory;
     public TextMeshProUGUI weaponPrice;
     public TextMeshProUGUI magzineRounds;
+    public TextMeshProUGUI CurrentAmountText;
+    public float CurrentAmount;
+    public string currencySign;
     public Transform referencePose;
 
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
         buyMenuPanel.SetActive(isBuyMenuOpen);
         Debug.Log($"Reference Pose at Start: {referencePose.transform.localPosition}");
     }
@@ -59,19 +63,32 @@ public class BuyMenuUI : MonoBehaviour
          weaponName.text = ("");
          weaponCategory.text = ("");
          weaponPrice.text = ("");
-        magzineRounds.text = ("");
+         magzineRounds.text = ("");
     }
-
 
     public void SpawnGun(ScriptableGuns SO) {
         //Instantiate has four parameters: (GameObject to spawn, Vector3 position, Quaternion rotation, Transform parent)
-        referencePose.transform.localPosition = SO.gunSpawnPosition;
-        var spawnedWeapon = Instantiate(SO.gunPrefab,referencePose);
-        spawnedWeapon.transform.localPosition = Vector3.zero;
-        spawnedWeapon.transform.localRotation = Quaternion.identity;
-
-        Debug.Log($"Spawned {SO.gunName} at reference pose local position {referencePose.transform.localPosition}");
-        Debug.Log($"Reference Pose after spawining the weapon{referencePose.transform.localPosition}");
-
+        if (CurrentAmount < SO.gunPrice)
+        {
+            return;
+        }
+        if (CurrentAmount >= SO.gunPrice)
+        {
+            CurrentAmount -= SO.gunPrice;
+            CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
+            referencePose.transform.localPosition = SO.gunSpawnPosition;
+            var spawnedWeapon = Instantiate(SO.gunPrefab, referencePose);
+            spawnedWeapon.transform.localPosition = Vector3.zero;
+            spawnedWeapon.transform.localRotation = Quaternion.identity;
+            //Debug.Log($"Spawned {SO.gunName} at reference pose local position {referencePose.transform.localPosition}");
+            //Debug.Log($"Reference Pose after spawining the weapon{referencePose.transform.localPosition
+        }
+        //else {
+        //    Debug.Log("Insufficient funds to spawn this weapon.");
+        //}
+        if (CurrentAmount <= 0)
+        {
+            return;
+        }
     }
 }

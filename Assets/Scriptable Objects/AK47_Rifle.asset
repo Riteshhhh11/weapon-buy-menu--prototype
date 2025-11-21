@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bee65516711a1446bebbb27de36cb04, type: 3}
   m_Name: AK47_Rifle
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableGuns
-  gunName: Temp Gun
-  gunCategory: 
-  gunPrice: 0
-  roundCapacity: 0
+  gunName: AK47
+  gunCategory: Rifle
+  gunPrice: 3500
+  roundCapacity: 35
   gunPrefab: {fileID: 8185219949623653253, guid: 7e074538ec706d748beb42a46599fc74, type: 3}
   gunSpawnPosition: {x: 0.92, y: -0.8, z: 1.99}
