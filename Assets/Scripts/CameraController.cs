@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
             RotationX = Mathf.Clamp(RotationX, -90f, 90f);
             transform.localRotation = Quaternion.Euler(RotationX, 0, 0);
             playerTransform.Rotate(Vector3.up * mouseX);
-            Debug.Log(sensitivity);
+            //Debug.Log(sensitivity);
         }
     }  
 }

@@ -12,19 +12,13 @@ public class BuyMenuUI : MonoBehaviour
     public TextMeshProUGUI weaponCategory;
     public TextMeshProUGUI weaponPrice;
     public TextMeshProUGUI magzineRounds;
-    public Transform GunHolderTransform;
-    //public TextMeshProUGUI weaponRoundCapacity;
-
-    //public ScriptableGuns SO;
+    public Transform referencePose;
 
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-
-        if (buyMenuPanel == null) {
-            //Debug.LogError("BuyMenuPanel not found in the scene.");
-        }
         buyMenuPanel.SetActive(isBuyMenuOpen);
+        Debug.Log($"Reference Pose at Start: {referencePose.transform.localPosition}");
     }
 
     void Update()
@@ -68,8 +62,16 @@ public class BuyMenuUI : MonoBehaviour
         magzineRounds.text = ("");
     }
 
+
     public void SpawnGun(ScriptableGuns SO) {
-        Instantiate(SO.gunPrefab, GunHolderTransform);
-        Debug.Log("Spawned " + SO.gunName);
+        //Instantiate has four parameters: (GameObject to spawn, Vector3 position, Quaternion rotation, Transform parent)
+        referencePose.transform.localPosition = SO.gunSpawnPosition;
+        var spawnedWeapon = Instantiate(SO.gunPrefab,referencePose);
+        spawnedWeapon.transform.localPosition = Vector3.zero;
+        spawnedWeapon.transform.localRotation = Quaternion.identity;
+
+        Debug.Log($"Spawned {SO.gunName} at reference pose local position {referencePose.transform.localPosition}");
+        Debug.Log($"Reference Pose after spawining the weapon{referencePose.transform.localPosition}");
+
     }
 }

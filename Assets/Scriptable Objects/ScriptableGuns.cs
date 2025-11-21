@@ -12,4 +12,8 @@ public class ScriptableGuns : ScriptableObject
 
     [Header("Model")]
     public GameObject gunPrefab;
+
+    [Header("Spawn Position")]
+    public Vector3 gunSpawnPosition;
+
 }
