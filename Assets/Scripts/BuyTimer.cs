@@ -6,7 +6,7 @@ public class BuyTimer : MonoBehaviour
     public float buyTime = 10f;
     public bool isBuyTimeActive = false;
     public float timeRemaining;
-    public int timeFromFloatToInt;
+    [HideInInspector] public int timeFromFloatToInt;
 
     void Start()
     {
@@ -25,9 +25,9 @@ public class BuyTimer : MonoBehaviour
             {
                 isBuyTimeActive = false;
                 buyTime = 0;
-                //int timeFromFloatToInt = Mathf.CeilToInt(timeRemaining);
-                Debug.Log("Time Remaining to Buy: " + timeFromFloatToInt.ToString());
             }
         }
+        timeFromFloatToInt = Mathf.CeilToInt(timeRemaining);
+        //Debug.Log("Time Remaining to Buy: " + timeFromFloatToInt.ToString());
     }
 }

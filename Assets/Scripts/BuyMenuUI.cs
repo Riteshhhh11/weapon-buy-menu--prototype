@@ -13,6 +13,7 @@ public class BuyMenuUI : MonoBehaviour
     public TextMeshProUGUI weaponPrice;
     public TextMeshProUGUI magzineRounds;
     public TextMeshProUGUI CurrentAmountText;
+    public TextMeshProUGUI timeRemainingText;
     public int CurrentAmount;
     public int maxAmount = 9000;
     public string currencySign;
@@ -31,6 +32,7 @@ public class BuyMenuUI : MonoBehaviour
     {
         if (buyTimer.isBuyTimeActive == true)
         {
+            timeRemainingText.SetText(buyTimer.timeFromFloatToInt.ToString());
             if (Input.GetKeyDown(KeyCode.B))
             {
                 ToggleBuyMenu();

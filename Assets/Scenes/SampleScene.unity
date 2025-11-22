@@ -1047,6 +1047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 480882714}
   - component: {fileID: 480882713}
+  - component: {fileID: 480882715}
   m_Layer: 0
   m_Name: BuyMenuHandler
   m_TagString: Untagged
@@ -1074,11 +1075,13 @@ MonoBehaviour:
   weaponPrice: {fileID: 1099924732}
   magzineRounds: {fileID: 309170156}
   CurrentAmountText: {fileID: 1858799581}
+  timeRemaining: {fileID: 1117162649}
   CurrentAmount: 9000
   maxAmount: 9000
   currencySign: "\xA3"
   referencePose: {fileID: 809900620}
   gunSpawnCount: 0
+  buyTimer: {fileID: 480882715}
 --- !u!4 &480882714
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,6 +1097,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480882715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480882712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82035fb955fd0844c90ba09be443d22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuyTimer
+  buyTime: 10
+  isBuyTimeActive: 0
+  timeRemaining: 0
+  timeFromFloatToInt: 0
 --- !u!1 &496944103
 GameObject:
   m_ObjectHideFlags: 0
@@ -4336,6 +4355,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   speed: 10
   buyMenuUI: {fileID: 480882713}
+  buyTimer: {fileID: 0}
 --- !u!143 &2020750380
 CharacterController:
   m_ObjectHideFlags: 0
