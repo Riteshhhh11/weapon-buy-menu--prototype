@@ -13,16 +13,17 @@ public class BuyMenuUI : MonoBehaviour
     public TextMeshProUGUI weaponPrice;
     public TextMeshProUGUI magzineRounds;
     public TextMeshProUGUI CurrentAmountText;
-    public float CurrentAmount;
+    public int CurrentAmount;
+    public int maxAmount = 9000;
     public string currencySign;
     public Transform referencePose;
+    public int gunSpawnCount = 0;
 
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
         buyMenuPanel.SetActive(isBuyMenuOpen);
-        Debug.Log($"Reference Pose at Start: {referencePose.transform.localPosition}");
     }
 
     void Update()
@@ -35,28 +36,21 @@ public class BuyMenuUI : MonoBehaviour
     void ToggleBuyMenu() {
         canControlPlayer = !canControlPlayer;
         isBuyMenuOpen = !isBuyMenuOpen;
-        buyMenuPanel.SetActive(isBuyMenuOpen);
-
+        buyMenuPanel.SetActive(isBuyMenuOpen); 
         if (UnityEngine.Cursor.lockState == CursorLockMode.Locked) {
 
             UnityEngine.Cursor.lockState = CursorLockMode.None;
-            //Debug.Log("Cursor unlocked");
         }
         else 
         { 
             UnityEngine.Cursor.lockState = CursorLockMode.Locked; 
-            //Debug.Log("Cursor locked");
         }
-        if (isBuyMenuOpen == true && UnityEngine.Cursor.lockState == CursorLockMode.Locked)
-        {
-            buyMenuPanel.SetActive(true);
-        } 
     }
     public void ShowWeaponStats(ScriptableGuns SO) {
-         weaponName.SetText(SO.gunName);
-         weaponCategory.SetText(SO.gunCategory);
-         weaponPrice.SetText(SO.gunPrice.ToString());
-         magzineRounds.SetText(SO.roundCapacity.ToString());
+         weaponName.SetText("Name: " + SO.gunName);
+         weaponCategory.SetText("Type: " + SO.gunCategory);
+         weaponPrice.SetText("Price: " + SO.gunPrice.ToString());
+         magzineRounds.SetText("Rounds: " + SO.roundCapacity.ToString());
     }
 
     public void ClearWeaponStats() {
@@ -72,22 +66,35 @@ public class BuyMenuUI : MonoBehaviour
         {
             return;
         }
-        if (CurrentAmount >= SO.gunPrice)
+        if (CurrentAmount >= SO.gunPrice && gunSpawnCount == 0)
         {
+            gunSpawnCount++;
             CurrentAmount -= SO.gunPrice;
             CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
             referencePose.transform.localPosition = SO.gunSpawnPosition;
             var spawnedWeapon = Instantiate(SO.gunPrefab, referencePose);
             spawnedWeapon.transform.localPosition = Vector3.zero;
             spawnedWeapon.transform.localRotation = Quaternion.identity;
-            //Debug.Log($"Spawned {SO.gunName} at reference pose local position {referencePose.transform.localPosition}");
-            //Debug.Log($"Reference Pose after spawining the weapon{referencePose.transform.localPosition
         }
-        //else {
-        //    Debug.Log("Insufficient funds to spawn this weapon.");
-        //}
         if (CurrentAmount <= 0)
         {
+            return;
+        }
+    }
+    public void SellGun(ScriptableGuns SO)
+    {
+        if (gunSpawnCount > 0)
+        { 
+            gunSpawnCount--;
+            CurrentAmount += SO.gunPrice;
+            Destroy(referencePose.GetChild(0).gameObject);
+            CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
+            if (CurrentAmount > maxAmount) {
+                CurrentAmount = maxAmount;
+                CurrentAmountText.SetText(CurrentAmount + currencySign.ToString());
+            }
+        }
+        else {
             return;
         }
     }
