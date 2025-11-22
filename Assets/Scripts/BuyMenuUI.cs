@@ -29,14 +29,21 @@ public class BuyMenuUI : MonoBehaviour
 
     void Update()
     {
-        if (buyTimer.isBuyTimeActive)
+        if (buyTimer.isBuyTimeActive == true)
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
                 ToggleBuyMenu();
             }
         }
-        else {
+        if (buyTimer.isBuyTimeActive == false && isBuyMenuOpen == true) {
+            buyMenuPanel.SetActive(false);
+            isBuyMenuOpen = false;
+            canControlPlayer = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
             return;
         }
     }
