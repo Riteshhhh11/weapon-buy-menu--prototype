@@ -18,6 +18,7 @@ public class BuyMenuUI : MonoBehaviour
     public string currencySign;
     public Transform referencePose;
     public int gunSpawnCount = 0;
+    public BuyTimer buyTimer;
 
     void Start()
     {
@@ -28,8 +29,15 @@ public class BuyMenuUI : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B)) {
-            ToggleBuyMenu();
+        if (buyTimer.isBuyTimeActive)
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                ToggleBuyMenu();
+            }
+        }
+        else {
+            return;
         }
     }
 

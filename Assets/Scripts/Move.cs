@@ -4,6 +4,7 @@ public class Move : MonoBehaviour
     public CharacterController controller;
     public float speed;
     public BuyMenuUI buyMenuUI;
+    public BuyTimer buyTimer;
     void Start()
     {
         controller = GetComponent<CharacterController>();
